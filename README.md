@@ -26,6 +26,12 @@ To install the python libraries, run the following:
 There are some options at the top of the Python script that allow you to tweak
 the mesh generation:
 
+### GROUND_ONLY
+
+Must be True or False. Decides whether all points should be used, or only those
+marked as a ground return. If you want to include buildings and trees, set this
+option to False. If you only want the terrain, set it to True.
+
 ### SAMPLE_RATE
 
 Must be between 0.0 and 1.0. Most lidar point clouds are too large to

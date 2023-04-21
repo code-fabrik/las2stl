@@ -3,6 +3,7 @@ import laspy as lp
 import numpy as np
 import trimesh
 
+GROUND_ONLY = false
 SAMPLE_RATE = 0.05
 SCALEXY = 0.1
 SCALEZ = 0.1
@@ -12,10 +13,12 @@ COMMON_BASE = False
 
 filename = input("Enter the filename (without extension) of a *.las file in the 'las' folder: ")
 
-print("Ground extraction...")
+print("Load...")
 # Extract lidar features marked as ground
 cloud = lp.read('./las/' + filename + '.las')
-cloud.points = cloud.points[cloud.classification == 2]
+
+if GROUND_ONLY:
+    cloud.points = cloud.points[cloud.classification == 2]
 
 points = np.vstack((cloud.x, cloud.y, cloud.z)).transpose()
 

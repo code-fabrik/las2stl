@@ -37,11 +37,15 @@ converted to a mesh of 1000x1000mm. A factor of 0.15 would create a mesh of
 size 150x150mm. Note that the scale factor is not mathematically correct, since
 many slicers auto-convert meters to millimeters.
 
+| SCALEXY = SCALEZ = 0.1 | SCALEXY = 0.1, SCALEZ = 0.15 |
+|---|---|
+| ![](doc/scalez10.png) | ![](doc/scalez15.png) |
+| Length, width and height are equally scaled | Height is 50% exaggerated respective to length and width |
+
 ### BASE_THICKNESS
 
 Must be greater than 0.0. Minimal thickness in Millimeters of the base the model
 stands on.
-
 
 | BASE_THICKNESS=5 | BASE_THICKNESS=50 |
 |---|---|

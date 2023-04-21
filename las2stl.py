@@ -19,9 +19,9 @@ cloud.points = cloud.points[cloud.classification == 2]
 
 points = np.vstack((cloud.x, cloud.y, cloud.z)).transpose()
 
-print("Point cloud compression...")
-# Discard 90% of the points
-points = points[::10]
+# print("Point cloud compression...")
+# Discard 50% of the points
+# points = points[::2]
 
 print("Surface reconstruction...")
 # Generate a surface mesh from the point cloud

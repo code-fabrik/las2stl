@@ -46,6 +46,7 @@ stands on.
 | BASE_THICKNESS=5 | BASE_THICKNESS=50 |
 |---|---|
 | ![](doc/base5.png) | ![](doc/base50.png) |
+| 5mm of spacing is added below the lowest point | 50mm of spacing is added below the lowest point |
 
 ### BASE_HEIGHT
 

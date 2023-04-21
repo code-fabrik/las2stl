@@ -1,5 +1,10 @@
 # las2stl
 
+LAS2STL is a Python script which allows you to automatically convert a Lidar
+point cloud to a 3D printable mesh. It tries to reconstruct the point cloud
+surface as accurately as possible, but still allows you to specify different
+parameters to control the output of the script.
+
 ## Requirements
 
 To install the python libraries, run the following:

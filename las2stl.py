@@ -3,7 +3,7 @@ import laspy as lp
 import numpy as np
 import trimesh
 
-GROUND_ONLY = false
+GROUND_ONLY = False
 SAMPLE_RATE = 0.05
 SCALEXY = 0.1
 SCALEZ = 0.1

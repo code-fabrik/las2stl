@@ -19,7 +19,7 @@ pyvista==0.38.5
 requests==2.31.0
 scooby==0.7.1
 six==1.16.0
-tqdm==4.65.0
+tqdm==4.66.3
 trimesh==3.21.5
 urllib3==1.26.18
 vtk==9.2.6

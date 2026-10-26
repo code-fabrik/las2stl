@@ -22,19 +22,16 @@ if GROUND_ONLY:
 
 points = np.vstack((cloud.x, cloud.y, cloud.z)).transpose()
 
-# print("Point cloud compression...")
-# Discard 50% of the points
-# points = points[::2]
+print("Point cloud sampling...")
+# Keep SAMPLE_RATE of the points. Triangulating the full cloud and decimating
+# the mesh afterwards needs more memory than most machines have.
+rng = np.random.default_rng(0)
+points = points[rng.random(len(points)) < SAMPLE_RATE]
 
 print("Surface reconstruction...")
 # Generate a surface mesh from the point cloud
 mesh = pv.wrap(points).delaunay_2d(alpha=0.0, progress_bar=True)
 mesh = mesh.compute_normals(progress_bar=True)
-
-print("Simplification...")
-# Decimate polygons
-compression_factor = 1 - SAMPLE_RATE
-mesh = mesh.decimate(compression_factor, progress_bar=True)
 
 print("Re-save...")
 mesh.save('./stl/' + filename + '.stl')

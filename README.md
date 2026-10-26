@@ -7,11 +7,12 @@ parameters to control the output of the script.
 
 ## Requirements
 
-To install the python libraries, run the following:
+Python 3.10 or newer is required. To install the python libraries, run the
+following:
 
 * Install virtualenv: `python -m pip install --user virtualenv`
 * Create virtual env: `virtualenv venv`
-* Activate virtual env: `source ./venv/bin/activate`
+* Activate virtual env: `source ./venv/bin/activate` (on Windows: `venv\Scripts\activate`)
 * Install requirements: `pip install -r requirements.txt`
 
 ## Usage
@@ -37,7 +38,9 @@ option to False. If you only want the terrain, set it to True.
 Must be between 0.0 and 1.0. Most lidar point clouds are too large to
 generate a mesh from. This setting allows you to sample the point cloud. A
 value of 0.3 means that 30% of the points are kept, the rest are discarded. A
-higher value means more resolution, but also more processing time.
+higher value means more resolution, but also more processing time and memory.
+For a 1x1km swissSURFACE3D tile (11.5 million points), 0.05 takes a few seconds
+and less than 1GB of memory, while 1.0 takes over a minute and 12GB.
 
 ### SCALEXY / SCALEZ
 Must be between 0.0 and Infinity. Defines the scaling factor
@@ -55,17 +58,20 @@ many slicers auto-convert meters to millimeters.
 
 ### BASE_THICKNESS
 
-Must be greater than 0.0. Minimal thickness in Millimeters of the base the model
-stands on.
+Must be greater than 0.0. Controls the minimal thickness of the base the model
+stands on, which is added below the lowest point (or below BASE_HEIGHT if
+COMMON_BASE is True). The thickness also depends on SCALEZ: the base is
+`BASE_THICKNESS × (1 - SCALEZ) × SCALEZ` millimeters thick. With SCALEZ = 0.1, a
+value of 50 gives a 4.5mm base and a value of 5 gives a 0.45mm base.
 
 | BASE_THICKNESS=5 | BASE_THICKNESS=50 |
 |---|---|
 | ![](doc/base5.png) | ![](doc/base50.png) |
-| 5mm of spacing is added below the lowest point | 50mm of spacing is added below the lowest point |
+| A thin base is added below the lowest point | A base ten times as thick is added below the lowest point |
 
 ### BASE_HEIGHT
 
-Can be any number. The altitude in meters above sea level where the final mesh should begin. This should be less than the lowest point in your point cloud.
+Can be any number. The altitude in meters above sea level where the final mesh should begin. This should be less than the lowest point in your point cloud. Otherwise the printed spacer height is negative, and with COMMON_BASE = True the base gets thinner or the terrain cuts through it.
 
 ### COMMON_BASE
 
@@ -76,4 +82,4 @@ If the setting is False, the height of the spacer in Millimeters is printed at t
 | COMMON_BASE = True | COMMON_BASE = False |
 |---|---|
 | ![](doc/commontrue.png) | ![](doc/commonfalse.png) |
-| - | Prints "Spacer height: 0.5mm" and "Spacer height: 20.2mm" |
+| - | Prints "This tile needs a 0.5mm spacer" and "This tile needs a 20.2mm spacer" |
